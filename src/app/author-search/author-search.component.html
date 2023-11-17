@@ -1,0 +1,62 @@
+
+<html class="body">
+<h1 class="ontario-label">
+	<label class="ontario-label ontario-label--heading" >
+		Author Search
+	</label>
+</h1>
+
+<!-- Search input -->
+<div class="ontario-form-group">
+	<label class="ontario-hint" for="searchname" >Enter author name to search.</label>
+	<input type="text" id="searchname" [(ngModel)]="searchName" class="ontario-input"
+		(input)="searchAuthor()" />
+
+</div>
+
+
+<div class="ontario-table-container ontario-small-12 ontario-medium-12 ontario-large-12">
+	<div class="ontario-table-scroll--wrapper">
+		<div class="ontario-table-scroll--div"></div>
+	</div>
+	<div class="ontario-table-div">
+		<table tabindex="0">
+			<caption>The List of Authors</caption>
+			<thead>
+				<tr>
+					<th scope="col" class="ontario-table-cell--numeric">
+						Author ID
+					</th>
+					<th scope="col">
+						Full Name
+					</th>
+					<th scope="col">
+						Phone
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let author of searchedAuthors">
+					<th scope="row" class="ontario-table-cell--numeric">{{ author.au_id }}</th>
+					<td class="link">
+						<a class="link" routerLink="/author/{{author.au_id}}">
+							{{ author.au_fname }} {{ author.au_lname }}
+						</a>
+					</td>
+					<td>
+						{{ author.phone }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<p></p>
+</html>
+<button type="button" *ngIf="showBackToTop" class="ontario-back-to-top ontario-back-to-top--default" (click)="scrollToTop()">
+	<svg class="ontario-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	  <path d="M0 0h24v24H0z" fill="none"/>
+	  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2.59l-3.29 3.29 1.41 1.41L14 10.41V13h2V9h-4z"/>
+	</svg>
+	Back to Top
+  </button>

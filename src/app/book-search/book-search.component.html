@@ -1,0 +1,57 @@
+
+<html class="body">
+<h1 class="ontario-label">
+	<label class="ontario-label ontario-label--heading">
+		Book Search
+	</label>
+</h1>
+<!-- Display the searched name -->
+
+<div class="ontario-form-group">
+	<label class="ontario-hint" for="searchname">Enter book title to search.</label>
+	<input [(ngModel)]="searchText" class="ontario-input" (input)="searchBooks()" />
+</div>
+
+<div class="ontario-table-container ontario-small-12 ontario-medium-12 ontario-large-12">
+	<div class="ontario-table-scroll--wrapper">
+		<div class="ontario-table-scroll--div"></div>
+	</div>
+	<div class="ontario-table-div">
+		<table tabindex="0">
+			<caption>The List of Books</caption>
+			<thead>
+				<tr>
+					<th scope="col" class="ontario-table-cell--numeric">
+						Author ID
+					</th>
+					<th scope="col">
+						Title ID
+					<th scope="col">
+						Book Title
+					</th>
+				</tr>
+			</thead>
+			<tbody *ngIf="searchedBooks && searchedBooks.length">
+				<tr *ngFor="let book of searchedBooks">
+					<th scope="row" class="ontario-table-cell--numeric">{{ book.au_id }}</th>
+					<th scope="row" class="ontario-table-cell--numeric">{{ book.title_id }}</th>
+					<td scope="row" class="link">
+						<a class="link" routerLink="/book/{{ book.title_id }}">
+							{{ book.title }}
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<p></p>
+
+</html>
+<button type="button" *ngIf="showBackToTop" class="ontario-back-to-top ontario-back-to-top--default" (click)="scrollToTop()">
+	<svg class="ontario-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	  <path d="M0 0h24v24H0z" fill="none"/>
+	  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2.59l-3.29 3.29 1.41 1.41L14 10.41V13h2V9h-4z"/>
+	</svg>
+	Back to Top
+  </button>

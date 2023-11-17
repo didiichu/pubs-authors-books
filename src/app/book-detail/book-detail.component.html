@@ -1,0 +1,36 @@
+<html class='body'>
+<h1 class="ontario-label">
+  <label class="ontario-label ontario-label--heading" for="heading-label-example">
+    Book Detail
+  </label>
+</h1>
+
+<div class="author-box" *ngFor="let title of titleDetails">
+	<div class="author-box" *ngFor="let author of title.authors">
+	  <p class="ontario-label-detail">Author ID: {{ author.au_id }}</p>
+	  <p class="ontario-label-detail">Author Name: {{ author.au_fname }} {{ author.au_lname }}</p>
+	</div>
+	</div>
+
+<div class="ontario-form-group book-box" *ngFor="let title of titleDetails">
+	
+	<p class="ontario-label-detail">Title ID: {{ title.title_id }}</p>
+	<p class="ontario-label-detail">Title: {{ title.title }}</p>
+	<p class="ontario-label-detail">Type: {{ title.type }}</p>
+	<p class="ontario-label-detail">Publisher ID: {{ title.pub_id }} </p>
+	<p class="ontario-label-detail">Price: {{ title.price }}</p>
+	<p class="ontario-label-detail">Advance: {{ title.advance }}</p>
+	<p class="ontario-label-detail">Royalty: {{ title.royalty }}</p>
+	<p class="ontario-label-detail">Sales: {{ title.ytd_sales }}</p>
+	<p class="ontario-label-detail">Notes: {{ title.notes }}</p>
+	<p class="ontario-label-detail">Publish Date: {{ title.pubdate }}</p>
+  </div>
+</html>
+
+
+
+
+
+
+
+

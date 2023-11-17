@@ -1,0 +1,112 @@
+
+
+<html lang="en">
+	<body class="body">
+<h1 class="ontario-label">
+	<label class="ontario-label ontario-label--heading" >
+		{{ title }}
+	</label>
+</h1>
+
+
+<!--Authors table-->
+<div class="ontario-table-container ontario-small-12 ontario-medium-12 ontario-large-12">
+	<div class="ontario-table-scroll--wrapper">
+		<div class="ontario-table-scroll--div"></div>
+	</div>
+	<div class="ontario-table-div">
+		<table tabindex="0">
+			<caption>The List of Authors</caption>
+			<thead>
+				<tr>
+					<th scope="col" class="ontario-table-cell--numeric">
+						Author ID
+						<button (click)="sortAuthorsByAuId()">
+							<ng-container *ngIf="isSortingAscending; else downArrow">&#9660;</ng-container>
+							<ng-template #downArrow>&#9650;</ng-template>
+						</button>
+					</th>
+					<th scope="col">
+						Full Name
+						<button (click)="sortAuthorsByAuFname()">
+							<ng-container *ngIf="isFnameSortingAscending; else downArrow">&#9660;</ng-container>
+							<ng-template #downArrow>&#9650;</ng-template>
+						</button>
+					</th>
+					<th scope="col">
+						Phone
+					</th>
+					<th scope="col">
+						Address
+					</th>
+					<th scope="col">
+						City
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let author of authors">
+					<th scope="row" class="ontario-table-cell--numeric">{{ author.au_id }}</th>
+					<td class="link">
+						<a class="link" routerLink="/author/{{author.au_id}}">
+							{{ author.au_fname }} {{ author.au_lname }}
+						</a>
+					</td>
+					<td>
+						{{ author.phone}}
+					</td>
+					<td>
+						{{author.address}}
+					</td>
+					<td>
+						{{author.city}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<p></p>
+<button class="ontario-button ontario-button--primary" (click)="openModal()">Add Author</button>
+
+<!-- Add -->
+<div class="ontario-form-group" *ngIf="showModal">
+	<!-- Add content -->
+	<div class="ontario-form-group">
+
+		<h2 class="ontario-label ontario-label--large">Add Author</h2>
+		<label class="ontario-label" for="text-input-example-width-10">
+			Author ID: <span class="ontario-label__flag">(required)</span>
+		</label>
+		<p class="error-message" *ngIf="errorMessage['au_id']">{{ errorMessage['au_id'] }}</p>
+		<p class="error-message" *ngIf="formatErrors['au_id']">{{ formatErrors['au_id'] }}</p>
+		<input class="ontario-input ontario-input--20-char-width" type="text" id="auId" [(ngModel)]="newAuthor.au_id"
+			name="au_id" />
+		<label class="ontario-label" for="auLname">
+			Last Name: <span class="ontario-label__flag">(required)</span>
+		</label>
+		<p class="error-message" *ngIf="errorMessage['au_lname']">{{ errorMessage['au_lname'] }}</p>
+		<p class="error-message" *ngIf="formatErrors['au_lname']">{{ formatErrors['au_lname'] }}</p>
+		<input class="ontario-input ontario-input--20-char-width" type="text" id="auLname"
+			[(ngModel)]="newAuthor.au_lname" name="au_lname" />
+		<label class="ontario-label" for="auFname">
+			First Name: <span class="ontario-label__flag">(required)</span>
+		</label>
+		<p class="error-message" *ngIf="errorMessage['au_fname']">{{ errorMessage['au_fname'] }}</p>
+		<p class="error-message" *ngIf="formatErrors['au_fname']">{{ formatErrors['au_fname'] }}</p>
+		<input class="ontario-input ontario-input--20-char-width" type="text" id="auFname"
+			[(ngModel)]="newAuthor.au_fname" name="au_fname" />
+		<button class="ontario-button ontario-button--primary" (click)="addAuthor()">Save</button>
+	</div>
+</div>
+<script src="svgxuse.js"></script>
+</body>
+</html>
+
+<button type="button" *ngIf="showBackToTop" class="ontario-back-to-top ontario-back-to-top--default" (click)="scrollToTop()">
+	<svg class="ontario-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+	  <path d="M0 0h24v24H0z" fill="none"/>
+	  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2.59l-3.29 3.29 1.41 1.41L14 10.41V13h2V9h-4z"/>
+	</svg>
+	Back to Top
+  </button>

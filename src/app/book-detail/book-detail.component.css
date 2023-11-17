@@ -1,0 +1,42 @@
+/*-----------------------------------------------------------*/
+.body {
+  margin: 0 auto; /* This centers the page horizontally */
+  max-width: 1450px; /* Adjust this value to control the maximum width of your content */
+}
+
+.author-box {
+  max-width: 400px;
+  border: 0px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+ 
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.book-box {
+  max-width: 400px;
+  border: 0px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  margin-bottom: 40px;
+}
+
+.author-box h2 {
+  color: #333;
+}
+
+
+.active {
+  visibility: visible;
+  opacity: 1
+}
+
+
+

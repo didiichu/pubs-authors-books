@@ -1,0 +1,101 @@
+
+<html class='body'>
+<h1 class="ontario-label">
+  <label class="ontario-label ontario-label--heading" for="heading-label-example">
+    Author Detail
+  </label>
+</h1>
+<div class="ontario-form-group" class="author-box" *ngIf="author && author.length > 0">
+  <p class="ontario-label-detail">ID: {{ author[0].au_id }}</p>
+  <p class="ontario-label-detail">First Name: {{ author[0].au_fname }}</p>
+  <p class="ontario-label-detail">Last Name: {{ author[0].au_lname }}</p>
+  <p class="ontario-label-detail">Phone: {{ author[0].phone }}</p>
+  <p class="ontario-label-detail">Address: {{ author[0].address }} </p>
+  <p class="ontario-label-detail">City: {{ author[0].city }}</p>
+  <p class="ontario-label-detail">State: {{ author[0].state }}</p>
+  <p class="ontario-label-detail">ZIP: {{ author[0].zip }}</p>
+  <p class="ontario-label-detail">Contract: {{ author[0].contract ? 'Yes' : 'No' }}</p>
+</div>
+<div class="ontario-form-group">
+  <button class="ontario-button ontario-button--primary" (click)="enableEditing()">Edit</button>
+  <button class="ontario-button ontario-button--secondary" (click)="deleteAuthor()">Delete Author</button>
+  <button class="ontario-button ontario-button--tertiary" (click)="goBack()">Back</button>
+  <div class="ontario-hint" *ngIf="!author || author.length === 0">
+    <p>No author details found.</p>
+  </div>
+
+  <div class="ontario-form-group" *ngIf="isEditing">
+    <h2 class="ontario-label ontario-label--large">Enter Author's Information</h2>
+    <label class="ontario-label">
+      First Name: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['au_fname']">{{ errorMessage['au_fname'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['au_fname']">{{ formatErrors['au_fname'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.au_fname" name="au_fname">
+    <label class="ontario-label">
+      Last Name: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['au_lname']">{{ errorMessage['au_lname'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['au_lname']">{{ formatErrors['au_lname'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.au_lname" name="au_lname">
+    <label class="ontario-label">
+      Phone Number: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['phone']">{{ errorMessage['phone'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['phone']">{{ formatErrors['phone'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.phone" name="phone">
+    <label class="ontario-label">
+      Address: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['address']">{{ errorMessage['address'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['address']">{{ formatErrors['address'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.address" name="address">
+    <label class="ontario-label">
+      City: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['city']">{{ errorMessage['city'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['city']">{{ formatErrors['city'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.city" name="city">
+    <label class="ontario-label">
+      State: <span class="ontario-label__flag">(required)</span>
+    </label>
+    <p class="error-message" *ngIf="errorMessage['state']">{{ errorMessage['state'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['state']">{{ formatErrors['state'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.state" name="state">
+    <label class="ontario-label">
+      Zip: <span class="ontario-label__flag">(required)</span>
+    </label>
+
+    <p class="error-message" *ngIf="errorMessage['zip']">{{ errorMessage['zip'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['zip']">{{ formatErrors['zip'] }}</p>
+    <input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.zip" name="zip">
+    <label class="ontario-label">
+      Contract (Yes/No): <span class="ontario-label__flag">(required)</span>
+    </label>
+
+    <p class="error-message" *ngIf="errorMessage['contract']">{{ errorMessage['contract'] }}</p>
+    <p class="error-message" *ngIf="formatErrors['contract']">{{ formatErrors['contract'] }}</p>
+    <!--<input class="ontario-input ontario-input--20-char-width" [(ngModel)]="updatedAuthor.contract" name="contract">-->
+    <div>
+      <label class="ontario-radio-label">
+        <input type="radio" [(ngModel)]="updatedAuthor.contract" [value]="true" name="contract"> Yes
+      </label>
+      <label class="ontario-radio-label">
+        <input type="radio" [(ngModel)]="updatedAuthor.contract" [value]="false" name="contract"> No
+      </label>
+    </div>
+    <p></p>
+    <button class="ontario-button ontario-button--primary" (click)="saveChanges()">Save</button>
+    <button type="button" *ngIf="showBackToTop" class="ontario-back-to-top ontario-back-to-top--default"
+      (click)="scrollToTop()">
+      <svg class="ontario-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2.59l-3.29 3.29 1.41 1.41L14 10.41V13h2V9h-4z" />
+      </svg>
+      Back to Top
+    </button>
+  </div>
+</div>
+
+</html>
